@@ -26,12 +26,12 @@ async function main() {
   const orderedFileNames = [
     "team.json",
     "project.json",
-    "projectTeam.json",
+    "project-team.json",
     "user.json",
     "task.json",
     "attachment.json",
     "comment.json",
-    "taskAssignment.json",
+    "task-assignment.json",
   ];
 
   await deleteAllData(orderedFileNames);
