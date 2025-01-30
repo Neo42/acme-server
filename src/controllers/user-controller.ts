@@ -22,6 +22,7 @@ export const getUser = async (req: Request, res: Response) => {
     });
     if (!user) {
       res.status(404).json({ error: "User not found" });
+      return;
     }
     res.json(user);
   } catch (error: any) {
