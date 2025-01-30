@@ -10,7 +10,6 @@ import taskRoutes from "./routes/task-routes";
 import searchRoutes from "./routes/search-routes";
 import userRoutes from "./routes/user-routes";
 import teamRoutes from "./routes/team-routes";
-import { PrismaClient } from "@prisma/client";
 
 dotenv.config();
 const app = express();
@@ -31,30 +30,6 @@ app.use("/tasks", taskRoutes);
 app.use("/search", searchRoutes);
 app.use("/users", userRoutes);
 app.use("/teams", teamRoutes);
-
-const prisma = new PrismaClient();
-
-app.post("/create-user", async (req, res) => {
-  try {
-    const {
-      username,
-      cognitoId,
-      profilePictureUrl = "i1.jpg",
-      teamId = 1,
-    } = req.body;
-    const newUser = await prisma.user.create({
-      data: {
-        username,
-        cognitoId,
-        profilePictureUrl,
-        teamId,
-      },
-    });
-    res.json(newUser);
-  } catch (error: any) {
-    res.status(500).json({ error: `Error creating user: ${error.message}` });
-  }
-});
 
 const PORT = Number(process.env.PORT) || 3000;
 app.listen(PORT, "0.0.0.0", () => {
